@@ -1,0 +1,146 @@
+1、依赖注入的目的
+1）降低耦合度
+2）简化代码
+3）便于测试
+
+2、那dagger2作为依赖注入框架为我们做了哪些工作呢？
+1）为我们自动生成了很多代码，避免了手动打代码，所以啊，有些类等的引用来自自动生成的代码，自动生成的代码是隐藏起来的
+
+
+3、dagger2怎么用呢？
+
+http://mp.weixin.qq.com/s/ogkl3gW9iufZlxyF_FV8_Q
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*======================================*/
+
+3、dagger2 api解读
+1）
+@Module
+Modules will be your daily job with dagger,
+so you need to feel comfortable with them.
+Modules are classes that provide instances of the objects we will need to inject.
+They are defined by annotating the class with @Module.
+There are some extra parameters that may be configured,but I’ll explain when we use them.
+
+@Module :
+identify this class as a Dagger module.
+injects : Classes where this module is going to inject any of its dependencies.
+ We need to specify those classes that are directly injected into object graph. This will be covered soon.
+
+ ---------- includes 当前module由includes指定的module组成
+ http://stackoverflow.com/questions/27726273/what-is-the-difference-between-addsto-and-includes-in-javas-dagger
+
+
+
+@Provides:
+Identify method as an injection provider. The name of the method doesn’t matter,
+it only relies on what class type is provided.
+
+@Singleton :
+if it’s present, the method will return always the same instance of the object,
+ which is far better than regular singletons.
+ If not, everytime this type is injected, we’ll get a new instance.
+ In this case, as we are not creating a new instance, but returning an existing one,
+ it would be the same if we don’t annotate as singleton, but it explains better what the provider is doing.
+ Application instance is unique.
+
+The object graph is the place where all these dependencies live.
+The object graph contains the created instances and is able to inject them to the objects we add to it.
+
+
+2）Diving deeper
+
+To understand Dagger 2 it is important (and probably a bit hard in the beginning) to know about the fundamentals of dependency injection
+and the concepts of each one of these guys (do not worry if you do not understand them yet, we will see examples):
+
+@Inject: Basically with this annotation we request dependencies.
+ In other words, you use it to tell Dagger that the annotated class or field wants to participate in dependency injection.
+ Thus, Dagger will construct instances of this annotated classes and satisfy their dependencies.
+
+@Module: Modules are classes whose methods provide dependencies,
+ so we define a class and annotate it with @Module, thus,
+  Dagger will know where to find the dependencies in order to satisfy them when constructing class instances.
+   One important feature of modules is that they have been designed to be partitioned and composed together (for instance we will see that in our apps we can have multiple composed modules).
+
+@Provide: Inside modules we define methods containing this annotation which tells Dagger
+            how we want to construct and provide those mentioned dependencies.
+
+@Component: Components basically are injectors, let’s say a bridge between @Inject and @Module,
+which its main responsibility is to put both together. They just give you instances of all the types you defined,
+ for example, we must annotate an interface with @Component and list all the @Modules that will compose that component,
+ and if any of them is missing, we get errors at compile time.
+ All the components are aware of the scope of dependencies it provides through its modules.
+
+@Scope: Scopes are very useful and Dagger 2 has has a more concrete way to do scoping through custom annotations.
+We will see an example later, but this is a very powerful feature, because as pointed out earlier,
+there is no need that every object knows about how to manage its own instances.
+ An scope example would be a class with a custom @PerActivity annotation,
+ so this object will live as long as our Activity is alive. In other words,
+ we can define the granularity of your scopes (@PerFragment, @PerUser, etc).
+
+@Qualifier: We use this annotation when the type of class is insufficient to identify a dependency.
+ For example in the case of Android, many times we need different types of context,
+ so we might define a qualifier annotation “@ForApplication” and “@ForActivity”,
+ thus when injecting a context we can use those qualifiers to tell Dagger which type of context we want to be provided.
+
+4、Mock
+In short, mocking is creating objects that simulate the behaviour of real objects.
+
+5、Object Graph
+The injector further(进一步) passes dependencies to other dependencies until it constructs the entire object graph.
+
+6、@Inject
+ Constructors are injected first, followed by fields, and then methods.
+ Fields and methods in superclasses are injected before those in subclasses.
