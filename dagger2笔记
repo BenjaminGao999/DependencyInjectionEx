@@ -14,19 +14,27 @@ http://mp.weixin.qq.com/s/ogkl3gW9iufZlxyF_FV8_Q
 
 
 
+1）Component Methods
+
+Every type annotated with @Component must contain at least one abstract component method.
+Component methods may have any name,
+but must have signatures that conform to either provision or members-injection contracts.
+
+
+
+2)对Component和SubComponent官方的javadoc做了很好的解读
+https://google.github.io/dagger/api/2.0/
 
 
 
 
+3）关于JSR330规定的Qualifier等做了很好的解读和例子
+http://docs.oracle.com/javaee/7/api/javax/inject/package-summary.html
 
 
 
 
-
-
-
-
-
+4、java注解Annotation知识
 
 
 

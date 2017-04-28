@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Dagger2ExApp/Dagger2ExApp.iml" filepath="$PROJECT_DIR$/Dagger2ExApp/Dagger2ExApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/DependencyInjectionEx.iml" filepath="$PROJECT_DIR$/DependencyInjectionEx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jannotationexapp/jannotationexapp.iml" filepath="$PROJECT_DIR$/jannotationexapp/jannotationexapp.iml" />
     </modules>
   </component>
 </project>

@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Dagger2ExApp" />
+            <option value="$PROJECT_DIR$/jannotationexapp" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

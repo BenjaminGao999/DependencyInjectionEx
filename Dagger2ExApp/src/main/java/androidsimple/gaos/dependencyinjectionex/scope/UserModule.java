@@ -11,7 +11,7 @@ public class UserModule {
     private User userA;
     private User userB;
 
-    public UserModule(User userA,User userB) {
+    public UserModule(User userA, User userB) {
         this.userB = userB;
         this.userA = userA;
     }
@@ -19,13 +19,14 @@ public class UserModule {
     @UserNamed("a")
     @Provides
     @UserScope
-    User provideUserA(){
+    User provideUserA() {
         return userA;
     }
+
     @UserNamed("b")
     @Provides
     @UserScope
-    User provideUserB(){
+    User provideUserB() {
         return userB;
     }
 
